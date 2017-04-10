@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Top ads widget radio expand view-->
+    <declare-styleable name="ExpandableOption" >
+        <attr name="title_option" format="reference|string" />
+        <attr name="checked_option" format="boolean"/>
+        <attr name="radio_id" format="reference|integer" />
+        <attr name="resource_image_arrow_up" format="reference"/>
+        <attr name="resource_image_arrow_down" format="reference"/>
+        <attr name="expandable_option_theme" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ExpandableOptionDefaultTheme">
+        <attr name="eo_radio_button_style" format="reference"/>
+        <attr name="eo_expandable_style" format="reference"/>
+        <attr name="eo_switch_style" format="reference"/>
+        <attr name="eo_text_option_style" format="reference"/>
+        <attr name="eo_checked_style" format="reference"/>
+        <attr name="eo_arrow_style" format="reference"/>
+        <attr name="eo_header_style" format="reference"/>
+    </declare-styleable>
+</resources>

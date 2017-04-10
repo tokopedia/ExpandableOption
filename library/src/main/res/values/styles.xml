@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources  xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="style_expandable_option_default">
+        <item name="eo_expandable_style">@style/eo_expandable_style</item>
+        <item name="eo_text_option_style">@style/eo_text_option_style</item>
+        <item name="eo_arrow_style">@style/eo_arrow_style</item>
+        <item name="eo_radio_button_style">@style/eo_radio_button_style</item>
+        <item name="eo_checked_style">@style/eo_checked_style</item>
+        <item name="eo_switch_style">@style/eo_switch_style</item>
+        <item name="eo_header_style">@style/eo_header_style</item>
+    </style>
+
+    <style name="eo_header_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="eo_expandable_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="eo_text_option_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="eo_arrow_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentEnd" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+    </style>
+
+    <style name="eo_radio_button_style">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="eo_checked_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentEnd" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="eo_switch_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentEnd" tools:targetApi="jelly_bean_mr1">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+</resources>

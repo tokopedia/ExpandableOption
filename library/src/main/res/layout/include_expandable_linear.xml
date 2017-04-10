@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.tokopedia.expandable.ExpandableViewLinear
+        android:id="@+id/expandable_view"
+        tools:style="@style/eo_linear_style"
+        style="?attr/eo_expandable_style">
+
+    </com.tokopedia.expandable.ExpandableViewLinear>
+
+</merge>

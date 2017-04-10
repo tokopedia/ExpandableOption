@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp"
+    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu felis a libero tristique lobortis. Mauris a dui commodo, consequat urna ut, euismod massa. Proin eu felis sed velit rhoncus tincidunt id et justo. Nam venenatis, tellus in semper facilisis, lectus felis consequat magna, ut tincidunt orci nibh ac turpis. \n\nSed interdum urna et nunc mollis consectetur. Nam vel enim et ante vulputate porttitor quis imperdiet libero. Mauris eu scelerisque ipsum. Quisque laoreet magna eu sapien pellentesque ullamcorper. Curabitur sed porttitor velit. Morbi libero neque, viverra et auctor molestie, consequat nec nunc. "
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:showIn="@layout/activity_switch_button_expandable" />

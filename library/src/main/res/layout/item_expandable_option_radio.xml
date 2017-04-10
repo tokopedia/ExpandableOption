@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:theme="@style/style_expandable_option_default">
+
+    <RelativeLayout
+        style="?attr/eo_header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        tools:style="@style/eo_header_style">
+
+        <com.tokopedia.expandable.RadioButtonExpandable
+            android:id="@+id/radio_button"
+            style="?attr/eo_radio_button_style"
+            tools:style="@style/eo_radio_button_style" />
+    </RelativeLayout>
+
+    <include layout="@layout/include_expandable_linear" />
+
+</LinearLayout>

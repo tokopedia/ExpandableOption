@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="CustomExpandableStyle" parent="style_expandable_option_default">
+        <item name="eo_header_style">@style/eo_header_style_custom</item>
+        <item name="eo_text_option_style">@style/eo_text_option_style_custom</item>
+    </style>
+
+
+    <style name="eo_header_style_custom" parent="eo_header_style">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="eo_text_option_style_custom" parent="eo_text_option_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+</resources>

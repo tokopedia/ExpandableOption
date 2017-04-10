@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:theme="@style/style_expandable_option_default"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        style="?attr/eo_header_style"
+        tools:style="@style/eo_header_style"
+        android:id="@+id/content_header_option"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:layout_toLeftOf="@+id/image_arrow"
+            layout="@layout/include_text_title_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/image_arrow"
+            android:src="@drawable/ic_arrow_down"
+            tools:style="?attr/eo_arrow_style"
+            style="?attr/eo_arrow_style"/>
+    </RelativeLayout>
+
+
+    <include layout="@layout/include_expandable_linear"/>
+
+</LinearLayout>
