@@ -206,6 +206,7 @@ you can change resource of image arrow by xml.
             <include layout="@layout/include_content_option" />
 
 </com.tokopedia.expandable.ExpandableOptionArrow>
+```
 
 
 ### Custom style expandable option
