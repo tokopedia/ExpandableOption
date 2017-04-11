@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ExpandableOption.iml" filepath="$PROJECT_DIR$/ExpandableOption.iml" />
-      <module fileurl="file://$PROJECT_DIR$/expandablesample/expandablesample.iml" filepath="$PROJECT_DIR$/expandablesample/expandablesample.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample.iml" filepath="$PROJECT_DIR$/sample/sample.iml" />
     </modules>
   </component>
 </project>

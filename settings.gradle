@@ -1,1 +1,1 @@
-include ':library', ':expandablesample'
+include ':library', ':sample'
