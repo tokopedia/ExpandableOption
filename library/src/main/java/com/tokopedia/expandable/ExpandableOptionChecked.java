@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 
 public class ExpandableOptionChecked extends BaseExpandableOptionText {
 
-    CheckBox checkBox;
+    private CheckBox checkBox;
 
     public ExpandableOptionChecked(Context context) {
         super(context);

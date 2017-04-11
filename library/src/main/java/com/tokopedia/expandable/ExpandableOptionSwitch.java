@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 
 public class ExpandableOptionSwitch extends BaseExpandableOptionText {
 
-    SwitchCompat switchCompat;
+    private SwitchCompat switchCompat;
 
     public ExpandableOptionSwitch(Context context) {
         super(context);
