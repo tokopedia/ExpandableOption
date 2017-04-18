@@ -46,8 +46,8 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
         super.init(attrs);
         TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandableOption);
         try {
-            imageUp = styledAttributes.getDrawable(R.styleable.ExpandableOption_resource_image_arrow_up);
-            imageDown = styledAttributes.getDrawable(R.styleable.ExpandableOption_resource_image_arrow_down);
+            imageUp = styledAttributes.getDrawable(R.styleable.ExpandableOption_eo_image_arrow_up);
+            imageDown = styledAttributes.getDrawable(R.styleable.ExpandableOption_eo_image_arrow_down);
         } finally {
             styledAttributes.recycle();
         }

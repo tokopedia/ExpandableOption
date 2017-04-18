@@ -8,11 +8,11 @@
     tools:context="com.tokopedia.expandable.sample.SwitchButtonExpandableActivity">
 
     <com.tokopedia.expandable.ExpandableOptionSwitch
-        android:background="@android:color/white"
-        app:title_option="title switch"
-        app:checked_option="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:eo_checked="true"
+        app:eo_title="title switch">
 
         <include layout="@layout/include_content_option" />
 

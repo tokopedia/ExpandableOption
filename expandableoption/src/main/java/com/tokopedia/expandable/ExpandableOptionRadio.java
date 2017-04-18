@@ -58,7 +58,7 @@ public class ExpandableOptionRadio extends BaseExpandableOption {
     protected void init(AttributeSet attrs) {
         TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandableOption);
         try {
-            radioId = styledAttributes.getResourceId(R.styleable.ExpandableOption_radio_id, NO_ID);
+            radioId = styledAttributes.getResourceId(R.styleable.ExpandableOption_eo_radio_id, NO_ID);
         } finally {
             styledAttributes.recycle();
         }

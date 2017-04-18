@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:checked_option="true"
-        app:title_option="title switch">
+        app:eo_checked="true"
+        app:eo_title="title switch">
 
         <include layout="@layout/include_content_option" />
     </com.tokopedia.expandable.ExpandableOptionArrow>
