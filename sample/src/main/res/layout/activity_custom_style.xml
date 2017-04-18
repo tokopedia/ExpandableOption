@@ -17,8 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@android:color/darker_gray"
-            app:expandable_option_theme="@style/CustomExpandableStyle"
-            app:title_option="Expandable view with custom style">
+            app:eo_theme="@style/CustomExpandableStyle"
+            app:eo_title="Expandable view with custom style">
 
             <include layout="@layout/include_content_option" />
         </com.tokopedia.expandable.ExpandableOptionChecked>
@@ -27,9 +27,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray"
-            app:resource_image_arrow_down="@drawable/ic_down"
-            app:resource_image_arrow_up="@drawable/ic_up"
-            app:title_option="Expandable with custom arrow">
+            app:eo_image_arrow_down="@drawable/ic_down"
+            app:eo_image_arrow_up="@drawable/ic_up"
+            app:eo_title="Expandable with custom arrow">
 
             <include layout="@layout/include_content_option" />
 

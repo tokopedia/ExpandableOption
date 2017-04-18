@@ -112,9 +112,9 @@ public abstract class BaseExpandableOption extends LinearLayout {
     protected void init(AttributeSet attributeSet){
         TypedArray styledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ExpandableOption);
         try {
-            expandableLayoutTheme = styledAttributes.getResourceId(R.styleable.ExpandableOption_expandable_option_theme, R.style.style_expandable_option_default);
-            optionChecked = styledAttributes.getBoolean(R.styleable.ExpandableOption_checked_option, false);
-            titleText = styledAttributes.getString(R.styleable.ExpandableOption_title_option);
+            expandableLayoutTheme = styledAttributes.getResourceId(R.styleable.ExpandableOption_eo_theme, R.style.style_expandable_option_default);
+            optionChecked = styledAttributes.getBoolean(R.styleable.ExpandableOption_eo_checked, false);
+            titleText = styledAttributes.getString(R.styleable.ExpandableOption_eo_title);
         } finally {
             styledAttributes.recycle();
         }
