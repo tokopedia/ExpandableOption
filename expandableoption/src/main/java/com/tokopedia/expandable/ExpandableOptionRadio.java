@@ -74,9 +74,9 @@ public class ExpandableOptionRadio extends BaseExpandableOption {
         };
     }
 
-    protected void setChecked(boolean b) {
+    public void setExpand(boolean b) {
         radioButton.setChecked(b);
-        super.setChecked(b);
+        super.setExpand(b);
     }
 
     @Override
