@@ -59,8 +59,8 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
     }
 
     @Override
-    protected void setChecked(boolean isChecked) {
+    public void setExpand(boolean isChecked) {
         checkBox.setChecked(isChecked);
-        super.setChecked(isChecked);
+        super.setExpand(isChecked);
     }
 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    tools:theme="@style/style_expandable_option_default"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:theme="@style/style_expandable_option_default">
 
     <RelativeLayout
         style="?attr/eo_header_style"
-        tools:style="@style/eo_header_style"
-        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:style="@style/eo_header_style">
 
-        <include layout="@layout/include_text_title_option"
-            android:layout_height="match_parent"
+        <include
+            layout="@layout/include_text_title_option"
             android:layout_width="wrap_content"
-            android:layout_toLeftOf="@+id/switch_button"/>
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/switch_button" />
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/switch_button"
@@ -24,6 +24,6 @@
             tools:style="@style/eo_switch_style" />
     </RelativeLayout>
 
-    <include layout="@layout/include_expandable_linear"/>
+    <include layout="@layout/include_expandable_linear" />
 
 </LinearLayout>

@@ -87,12 +87,12 @@ public abstract class BaseExpandableOption extends LinearLayout {
         }
     }
 
-    protected void setChecked(boolean isChecked){
+    public void setExpand(boolean isChecked){
         optionChecked = isChecked;
         setVisibleChildView(isChecked);
     }
 
-    protected boolean isChecked(){
+    public boolean isExpanded(){
         return optionChecked;
     }
 

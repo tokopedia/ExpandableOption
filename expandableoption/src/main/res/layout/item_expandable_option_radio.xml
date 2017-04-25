@@ -10,7 +10,6 @@
         style="?attr/eo_header_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         tools:style="@style/eo_header_style">
 
         <com.tokopedia.expandable.RadioButtonExpandable
