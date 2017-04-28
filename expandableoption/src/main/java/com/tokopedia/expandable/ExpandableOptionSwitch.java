@@ -59,4 +59,10 @@ public class ExpandableOptionSwitch extends BaseExpandableOptionText {
         switchCompat.setChecked(isChecked);
         super.setExpand(isChecked);
     }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        switchCompat.setEnabled(enabled);
+    }
 }
