@@ -12,10 +12,12 @@
         android:orientation="vertical">
 
         <com.tokopedia.expandable.ExpandableOptionChecked
+            android:id="@+id/checked"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@android:color/darker_gray"
+            app:eo_enabled="false"
             app:eo_theme="@style/CustomExpandableStyle"
             app:eo_title="Expandable view with custom style">
 
@@ -23,6 +25,7 @@
         </com.tokopedia.expandable.ExpandableOptionChecked>
 
         <com.tokopedia.expandable.ExpandableOptionArrow
+            android:id="@+id/arrow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray"

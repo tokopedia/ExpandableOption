@@ -3,6 +3,7 @@ package com.tokopedia.expandable;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -67,7 +68,9 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
         contentHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                toggle();
+                if(optionEnabled) {
+                    toggle();
+                }
             }
         });
     }
@@ -88,4 +91,5 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
         imageArrow = (ImageView) view.findViewById(R.id.image_arrow);
         contentHeader = view.findViewById(R.id.content_header_option);
     }
+
 }

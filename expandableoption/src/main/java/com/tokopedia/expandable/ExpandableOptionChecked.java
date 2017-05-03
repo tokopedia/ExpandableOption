@@ -1,6 +1,7 @@
 package com.tokopedia.expandable;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -62,5 +63,11 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
     public void setExpand(boolean isChecked) {
         checkBox.setChecked(isChecked);
         super.setExpand(isChecked);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        checkBox.setEnabled(enabled);
     }
 }

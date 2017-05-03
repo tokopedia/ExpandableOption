@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.view.ContextThemeWrapper;
@@ -18,11 +20,16 @@ import android.widget.LinearLayout;
 
 public abstract class BaseExpandableOption extends LinearLayout {
 
+    public static final String OPTION_CHECKED = "OPTION_CHECKED";
+    public static final String TITLE_TEXT = "TITLE_TEXT";
+    public static final String OPTION_ENABLED = "OPTION_ENABLED";
+    public static final String SUPER_STATE = "superState";
     @StyleRes
     private int expandableLayoutTheme;
     protected ExpandableViewLinear expandableViewLinear;
 
     protected boolean optionChecked;
+    protected boolean optionEnabled = true;
     protected String titleText ="";
     private ExpandableListener expandableListener;
 
@@ -115,6 +122,7 @@ public abstract class BaseExpandableOption extends LinearLayout {
             expandableLayoutTheme = styledAttributes.getResourceId(R.styleable.ExpandableOption_eo_theme, R.style.style_expandable_option_default);
             optionChecked = styledAttributes.getBoolean(R.styleable.ExpandableOption_eo_checked, false);
             titleText = styledAttributes.getString(R.styleable.ExpandableOption_eo_title);
+            optionEnabled = styledAttributes.getBoolean(R.styleable.ExpandableOption_eo_enabled, true);
         } finally {
             styledAttributes.recycle();
         }
@@ -127,6 +135,7 @@ public abstract class BaseExpandableOption extends LinearLayout {
         initView(view);
         expandableViewLinear = (ExpandableViewLinear) view.findViewById(R.id.expandable_view);
         setVisibleChildView(optionChecked);
+        setEnabled(optionEnabled);
         setOrientation(VERTICAL);
     }
 
@@ -136,5 +145,38 @@ public abstract class BaseExpandableOption extends LinearLayout {
 
     public interface ExpandableListener{
         void onExpandViewChange(boolean isExpand);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(SUPER_STATE, super.onSaveInstanceState());
+        bundle.putBoolean(OPTION_CHECKED, optionChecked);
+        bundle.putString(TITLE_TEXT, titleText);
+        bundle.putBoolean(OPTION_ENABLED, optionEnabled);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if(state instanceof Bundle){
+            Bundle bundle = (Bundle) state;
+            optionChecked = bundle.getBoolean(OPTION_CHECKED);
+            titleText = bundle.getString(TITLE_TEXT);
+            optionEnabled = bundle.getBoolean(OPTION_ENABLED, optionEnabled);
+
+            setExpand(optionChecked);
+            setEnabled(optionEnabled);
+            setTitleText(titleText);
+            super.onRestoreInstanceState(bundle.getParcelable(SUPER_STATE));
+            return;
+        }
+        super.onRestoreInstanceState(state);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        optionEnabled = enabled;
     }
 }
