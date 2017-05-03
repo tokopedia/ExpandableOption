@@ -9,6 +9,7 @@
         <attr name="eo_image_arrow_up" format="reference"/>
         <attr name="eo_image_arrow_down" format="reference"/>
         <attr name="eo_theme" format="reference"/>
+        <attr name="eo_enabled" format="reference|boolean"/>
     </declare-styleable>
 
     <declare-styleable name="ExpandableOptionDefaultTheme">

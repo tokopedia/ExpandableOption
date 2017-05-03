@@ -7,6 +7,8 @@ package com.tokopedia.expandable;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,6 +20,10 @@ import android.widget.RadioGroup;
 
 
 public class RadioGroupExpandable extends LinearLayout {
+    public static final String CHECKED_ID = "CheckedId";
+    public static final String PROTECT_FROM_CHECKED = "PROTECT_FROM_CHECKED";
+    public static final String SUPER_STATE = "superState";
+
     private int checkedId = -1;
     private CompoundButton.OnCheckedChangeListener checkedChangeListener;
     private boolean protectFromCheckedChange = false;

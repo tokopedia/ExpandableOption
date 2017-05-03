@@ -7,11 +7,13 @@
     tools:context="com.tokopedia.expandable.sample.RadioButtonExpandableActivity">
 
     <com.tokopedia.expandable.RadioGroupExpandable
+        android:id="@+id/radio_group"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <com.tokopedia.expandable.ExpandableOptionRadio
+            android:id="@+id/radio1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -22,6 +24,7 @@
         </com.tokopedia.expandable.ExpandableOptionRadio>
 
         <com.tokopedia.expandable.ExpandableOptionRadio
+            android:id="@+id/radio2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -31,6 +34,7 @@
         </com.tokopedia.expandable.ExpandableOptionRadio>
 
         <com.tokopedia.expandable.ExpandableOptionRadio
+            android:id="@+id/radio3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"

@@ -1,6 +1,7 @@
 package com.tokopedia.expandable;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
