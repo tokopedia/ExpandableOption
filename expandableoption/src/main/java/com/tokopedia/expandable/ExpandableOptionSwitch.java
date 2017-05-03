@@ -64,5 +64,6 @@ public class ExpandableOptionSwitch extends BaseExpandableOptionText {
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         switchCompat.setEnabled(enabled);
+        switchCompat.setClickable(enabled);
     }
 }
