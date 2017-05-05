@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -149,29 +150,32 @@ public abstract class BaseExpandableOption extends LinearLayout {
 
     @Override
     protected Parcelable onSaveInstanceState() {
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(SUPER_STATE, super.onSaveInstanceState());
-        bundle.putBoolean(OPTION_CHECKED, optionChecked);
-        bundle.putString(TITLE_TEXT, titleText);
-        bundle.putBoolean(OPTION_ENABLED, optionEnabled);
-        return bundle;
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.childrenStates = new SparseArray();
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).saveHierarchyState(ss.childrenStates);
+        }
+        return ss;
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
-        if(state instanceof Bundle){
-            Bundle bundle = (Bundle) state;
-            optionChecked = bundle.getBoolean(OPTION_CHECKED);
-            titleText = bundle.getString(TITLE_TEXT);
-            optionEnabled = bundle.getBoolean(OPTION_ENABLED, optionEnabled);
-
-            setExpand(optionChecked);
-            setEnabled(optionEnabled);
-            setTitleText(titleText);
-            super.onRestoreInstanceState(bundle.getParcelable(SUPER_STATE));
-            return;
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        for (int i = 0; i < getChildCount(); i++) {
+            getChildAt(i).restoreHierarchyState(ss.childrenStates);
         }
-        super.onRestoreInstanceState(state);
+    }
+
+    @Override
+    protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
+        dispatchFreezeSelfOnly(container);
+    }
+
+    @Override
+    protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
+        dispatchThawSelfOnly(container);
     }
 
     @Override
