@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    android:id="@+id/vg_root"
+    tools:theme="@style/style_expandable_option_default">
+
+    <FrameLayout
+        android:id="@+id/content_header_option"
+        style="?attr/eo_header_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:style="@style/eo_header_style"
+        tools:layout_height="30dp"
+        tools:background="#d0d0d0">
+        <!-- header will ifnlated programmatically here -->
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/expandable_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:style="@style/eo_linear_style"
+        style="?attr/eo_expandable_style"
+        tools:layout_height="100dp"
+        tools:background="#e0e0e0">
+        <!-- child will ifnlated programmatically here -->
+    </FrameLayout>
+
+</LinearLayout>

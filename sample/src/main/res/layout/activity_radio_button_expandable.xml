@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tokopedia.expandable.sample.RadioButtonExpandableActivity">
+    android:layout_height="wrap_content">
 
-    <com.tokopedia.expandable.RadioGroupExpandable
-        android:id="@+id/radio_group"
-        android:layout_width="368dp"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        tools:context="com.tokopedia.expandable.sample.RadioButtonExpandableActivity">
 
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:id="@+id/radio1"
-            android:layout_width="match_parent"
+        <com.tokopedia.expandable.RadioGroupExpandable
+            android:id="@+id/radio_group"
+            android:layout_width="368dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:eo_title="title switch">
+            android:orientation="vertical">
 
-            <include layout="@layout/include_content_option" />
+            <com.tokopedia.expandable.ExpandableOptionRadio
+                android:id="@+id/radio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:eo_title="title switch">
 
-        </com.tokopedia.expandable.ExpandableOptionRadio>
+                <include layout="@layout/include_content_option" />
 
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:id="@+id/radio2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:eo_title="title switch">
+            </com.tokopedia.expandable.ExpandableOptionRadio>
 
-            <include layout="@layout/include_content_option" />
-        </com.tokopedia.expandable.ExpandableOptionRadio>
+            <com.tokopedia.expandable.ExpandableOptionRadio
+                android:id="@+id/radio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:eo_title="title switch">
 
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:id="@+id/radio3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:eo_checked="true"
-            app:eo_title="title switch">
+                <include layout="@layout/include_content_option" />
+            </com.tokopedia.expandable.ExpandableOptionRadio>
 
-            <include layout="@layout/include_content_option" />
-        </com.tokopedia.expandable.ExpandableOptionRadio>
-    </com.tokopedia.expandable.RadioGroupExpandable>
+            <com.tokopedia.expandable.ExpandableOptionRadio
+                android:id="@+id/radio3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:eo_checked="true"
+                app:eo_title="title switch">
 
-</android.support.constraint.ConstraintLayout>
+                <include layout="@layout/include_content_option" />
+            </com.tokopedia.expandable.ExpandableOptionRadio>
+        </com.tokopedia.expandable.RadioGroupExpandable>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

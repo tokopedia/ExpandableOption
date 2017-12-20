@@ -7,7 +7,9 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 /**
@@ -37,18 +39,29 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+//    @Override
+//    protected View getHeaderLayout() {
+//        return  R.layout.item_expandable_option_arrow_header;
+//    }
+
+
     @Override
-    protected int getLayoutRes() {
-        return R.layout.item_expandable_option_arrow;
+    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
+        return inflater.inflate(R.layout.item_expandable_option_arrow_header, parent, false);
+    }
+
+    @Override
+    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
+        return null;
     }
 
     @Override
     protected void init(AttributeSet attrs) {
         super.init(attrs);
-        TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandableOption);
+        TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.BaseExpandableOption);
         try {
-            imageUp = styledAttributes.getDrawable(R.styleable.ExpandableOption_eo_image_arrow_up);
-            imageDown = styledAttributes.getDrawable(R.styleable.ExpandableOption_eo_image_arrow_down);
+            imageUp = styledAttributes.getDrawable(R.styleable.BaseExpandableOption_eo_image_arrow_up);
+            imageDown = styledAttributes.getDrawable(R.styleable.BaseExpandableOption_eo_image_arrow_down);
         } finally {
             styledAttributes.recycle();
         }
@@ -68,7 +81,7 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
         contentHeader.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(optionEnabled) {
+                if(isEnabled()) {
                     toggle();
                 }
             }
@@ -76,9 +89,9 @@ public class ExpandableOptionArrow extends BaseExpandableOptionText {
     }
 
     @Override
-    public void setVisibleChildView(boolean b) {
-        super.setVisibleChildView(b);
-        if(b){
+    public void setExpand(boolean isExpanded) {
+        super.setExpand(isExpanded);
+        if(isExpanded){
             imageArrow.setImageDrawable(imageUp);
         }else{
             imageArrow.setImageDrawable(imageDown);

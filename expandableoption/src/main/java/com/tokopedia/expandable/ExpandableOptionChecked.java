@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -34,7 +36,7 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
 
     @Override
     protected void onFinishInflate() {
-        checkBox.setChecked(optionChecked);
+        checkBox.setChecked(isExpanded());
         checkBox.setOnCheckedChangeListener(onCheckedChange());
         super.onFinishInflate();
     }
@@ -43,7 +45,7 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setVisibleChildView(isChecked);
+                setExpand(isChecked);
             }
         };
     }
@@ -55,8 +57,13 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
     }
 
     @Override
-    protected int getLayoutRes() {
-        return R.layout.item_expandable_option_checked;
+    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
+        return inflater.inflate(R.layout.item_expandable_option_checked_header, parent, false);
+    }
+
+    @Override
+    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
+        return null;
     }
 
     @Override

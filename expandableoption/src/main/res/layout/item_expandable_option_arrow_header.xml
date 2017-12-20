@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        layout="@layout/include_text_title_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/image_arrow" />
+
+    <ImageView
+        android:id="@+id/image_arrow"
+        style="?attr/eo_arrow_style"
+        android:src="@drawable/ic_arrow_down"
+        tools:style="?attr/eo_arrow_style" />
+</RelativeLayout>

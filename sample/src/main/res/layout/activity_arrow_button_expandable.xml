@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,13 +8,15 @@
 
     <com.tokopedia.expandable.ExpandableOptionArrow
         android:id="@+id/arrow"
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         app:eo_checked="true"
-        app:eo_title="title switch">
+        app:eo_title="title switch"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp">
 
         <include layout="@layout/include_content_option" />
     </com.tokopedia.expandable.ExpandableOptionArrow>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
