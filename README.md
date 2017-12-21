@@ -1,6 +1,6 @@
 # Expandable Option
 
-This library is used to show a layout expandable with kind of header option like switch, radio button, checkbox, etc.
+This library is used to show a layout expandable with kind of header option like switch, radio button, checkbox, or even custome header as you like.
 
 <img src="expandable_sample.gif?raw=true" alt="" width="240" />
 
