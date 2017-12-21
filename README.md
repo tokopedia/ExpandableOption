@@ -15,7 +15,7 @@ Use RadioGroupExpandable as a RadioGroup.
 #### Example Code - ExpandableOptionRadio
 
 ```java
-baseExpandableOptionObject.setExpand(boolean isChecked);
+baseExpandableOptionObject.setExpand(true);
 baseExpandableOptionObject.toggle();
 baseExpandableOptionObject.isExpanded();
 
