@@ -1,5 +1,6 @@
 package com.tokopedia.expandable;
 
+import android.animation.LayoutTransition;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,7 +29,9 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
     private boolean optionEnabled = true;
 
     private View headerView;
+    private View footerView;
     private int headerLayoutRes;
+    private int footerLayoutRes;
 
     public BaseExpandableOption(Context context) {
         super(context);
@@ -83,18 +86,15 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.item_expandable_option_base, this, false);
 
+        ViewGroup vgRoot = (ViewGroup) view.findViewById(R.id.vg_root);
+        LayoutTransition layoutTransition = vgRoot.getLayoutTransition();
+        layoutTransition.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 0);
+
         vgHeader = ((ViewGroup) view.findViewById(R.id.content_header_option));
-        View headerView;
-        if (headerLayoutRes != -1) {
-            headerView = inflater.inflate(headerLayoutRes, (ViewGroup)getRootView(), false);
-        } else {
-            headerView = getHeaderLayout(inflater, (ViewGroup)getRootView());
-        }
-        setHeaderView(headerView);
+        setUpHeaderFromRes();
 
         expandableChildViewLinear = (ViewGroup) view.findViewById(R.id.expandable_view);
-        View footerView = getFooterLayout(inflater, (ViewGroup)getRootView());
-        setFooterView(footerView);
+        setUpFooterFromRes();
 
         addView(view);
         initView(view);
@@ -103,6 +103,23 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         setEnabled(optionEnabled);
     }
 
+    private void setUpHeaderFromRes(){
+        if (getRootView()!= null && headerLayoutRes > 0 && vgHeader!= null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View headerView;
+            headerView = inflater.inflate(headerLayoutRes, (ViewGroup)getRootView(), false);
+            setHeaderView(headerView);
+        }
+    }
+
+    private void setUpFooterFromRes(){
+        if (getRootView()!= null && footerLayoutRes > 0 && expandableChildViewLinear!= null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View footerView;
+            footerView = inflater.inflate(footerLayoutRes, (ViewGroup)getRootView(), false);
+            setFooterView(footerView);
+        }
+    }
 
     public boolean isHeaderCanToogle() {
         return true;
@@ -126,6 +143,12 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
 
     public void setFooterView(View customFooterView) {
         if (customFooterView != null) {
+            if (footerView != null) {
+                if (footerView.getParent() != null) {
+                    ((ViewGroup) footerView.getParent()).removeView(footerView);
+                }
+            }
+            this.footerView = customFooterView;
             expandableChildViewLinear.addView(customFooterView);
         }
     }
@@ -182,9 +205,15 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
 
     protected abstract void initView(View view);
 
-    protected abstract View getHeaderLayout(LayoutInflater inflater, ViewGroup parent);
+    public void setHeaderLayoutRes(int headerLayoutRes) {
+        this.headerLayoutRes = headerLayoutRes;
+        setUpHeaderFromRes();
+    }
 
-    protected abstract View getFooterLayout(LayoutInflater inflater, ViewGroup parent);
+    public void setFooterLayoutRes(int footerLayoutRes) {
+        this.footerLayoutRes = footerLayoutRes;
+        setUpFooterFromRes();
+    }
 
     @Override
     public void onClick(View view) {

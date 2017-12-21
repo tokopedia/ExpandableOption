@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.tokopedia.expandable.sample.ArrowButtonExpandableActivity">
 
-    <com.tokopedia.expandable.ExpandableOptionArrow
-        android:id="@+id/arrow"
-        android:layout_width="368dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linear_layout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:eo_checked="true"
-        app:eo_title="title switch"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
-        <include layout="@layout/include_content_option" />
-    </com.tokopedia.expandable.ExpandableOptionArrow>
+        <com.tokopedia.expandable.ExpandableOptionArrow
+            android:id="@+id/arrow"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_stroke_gray_rounded"
+            app:eo_checked="true"
+            app:eo_title="title switch"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp">
 
-</LinearLayout>
+            <include layout="@layout/include_content_option" />
+        </com.tokopedia.expandable.ExpandableOptionArrow>
+
+        <com.tokopedia.expandable.ExpandableOptionArrow
+            android:id="@+id/arrow2"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_stroke_gray_rounded"
+            app:eo_checked="true"
+            app:eo_title="title switch"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <include layout="@layout/include_content_option" />
+        </com.tokopedia.expandable.ExpandableOptionArrow>
+
+        <com.tokopedia.expandable.ExpandableOptionArrow
+            android:id="@+id/arrow3"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_stroke_gray_rounded"
+            app:eo_checked="true"
+            app:eo_title="title switch"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <include layout="@layout/include_content_option" />
+        </com.tokopedia.expandable.ExpandableOptionArrow>
+
+    </LinearLayout>
+</ScrollView>

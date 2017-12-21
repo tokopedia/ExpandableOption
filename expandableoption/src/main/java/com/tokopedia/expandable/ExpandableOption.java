@@ -33,14 +33,4 @@ public class ExpandableOption extends BaseExpandableOption {
 
     }
 
-    @Override
-    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_expandable_option_arrow_header, parent, false);
-    }
-
-    @Override
-    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_expandable_option_arrow_header, parent, false);
-    }
-
 }

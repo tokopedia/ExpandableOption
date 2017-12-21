@@ -47,19 +47,15 @@ public class ExpandableOptionSwitch extends BaseExpandableOptionText {
     }
 
     @Override
+    protected void init() {
+        setHeaderLayoutRes(R.layout.item_expandable_option_switch_header);
+        super.init();
+    }
+
+    @Override
     protected void initView(View view) {
         switchCompat = (SwitchCompat) view.findViewById(R.id.switch_button);
         super.initView(view);
-    }
-
-    @Override
-    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_expandable_option_switch_header, parent, false);
     }
 
     @Override

@@ -44,9 +44,9 @@ public abstract class BaseExpandableOptionRadio extends BaseExpandableOption {
 
     @Override
     protected void initView(View view) {
-        CompoundButton checkable = getCheckable(view);
+        CompoundButton checkable = getCheckable();
         if (checkable != null) {
-            getCheckable(view).setText(titleText);
+            getCheckable().setText(titleText);
             checkable.setChecked(isExpanded());
             checkable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -56,10 +56,9 @@ public abstract class BaseExpandableOptionRadio extends BaseExpandableOption {
             });
         }
         setExpand(isExpanded());
-
     }
 
-    public abstract CompoundButton getCheckable(View view);
+    public abstract CompoundButton getCheckable();
 
     private void onRadioClicked(){
         setExpand(true);
@@ -77,7 +76,7 @@ public abstract class BaseExpandableOptionRadio extends BaseExpandableOption {
 
     public void setExpand(boolean b) {
         if (b != isExpanded()) {
-            CompoundButton compoundButton = getCheckable(this.getRootView());
+            CompoundButton compoundButton = getCheckable();
             if (compoundButton!= null) {
                 compoundButton.setChecked(b);
             }
@@ -87,8 +86,8 @@ public abstract class BaseExpandableOptionRadio extends BaseExpandableOption {
 
     @Override
     public void setTitleText(String titleText) {
-        if (getCheckable(this.getRootView())!= null) {
-            getCheckable(this.getRootView()).setText(titleText);
+        if (getCheckable()!= null) {
+            getCheckable().setText(titleText);
         }
         super.setTitleText(titleText);
     }
@@ -96,8 +95,8 @@ public abstract class BaseExpandableOptionRadio extends BaseExpandableOption {
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        if (getCheckable(this.getRootView())!= null) {
-            getCheckable(this.getRootView()).setEnabled(enabled);
+        if (getCheckable()!= null) {
+            getCheckable().setEnabled(enabled);
         }
     }
 }

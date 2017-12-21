@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="com.tokopedia.expandable.sample.CheckedButtonExpandableActivity">
 
-    <com.tokopedia.expandable.ExpandableOptionChecked
-        android:id="@+id/checked"
+    <LinearLayout
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:eo_checked="true"
-        app:eo_title="title switch">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
-        <include layout="@layout/include_content_option"/>
+        <com.tokopedia.expandable.ExpandableOptionChecked
+            android:id="@+id/checked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:eo_checked="true"
+            app:eo_title="title switch">
 
-    </com.tokopedia.expandable.ExpandableOptionChecked>
+            <include layout="@layout/include_content_option" />
 
-</android.support.constraint.ConstraintLayout>
+        </com.tokopedia.expandable.ExpandableOptionChecked>
+
+        <com.tokopedia.expandable.ExpandableOptionChecked
+            android:id="@+id/checked2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:eo_checked="true"
+            app:eo_title="title switch">
+
+            <include layout="@layout/include_content_option" />
+
+        </com.tokopedia.expandable.ExpandableOptionChecked>
+
+    </LinearLayout>
+</ScrollView>

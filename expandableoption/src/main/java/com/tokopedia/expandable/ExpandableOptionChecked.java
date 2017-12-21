@@ -51,19 +51,15 @@ public class ExpandableOptionChecked extends BaseExpandableOptionText {
     }
 
     @Override
+    protected void init() {
+        setHeaderLayoutRes(R.layout.item_expandable_option_checked_header);
+        super.init();
+    }
+
+    @Override
     protected void initView(View view) {
         super.initView(view);
         checkBox = (CheckBox) view.findViewById(R.id.check_button);
-    }
-
-    @Override
-    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_expandable_option_checked_header, parent, false);
-    }
-
-    @Override
-    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
-        return null;
     }
 
     @Override

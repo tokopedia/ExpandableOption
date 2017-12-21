@@ -34,19 +34,15 @@ public class ExpandableOptionRadio extends BaseExpandableOptionRadio {
     }
 
     @Override
-    protected View getHeaderLayout(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.item_expandable_option_radio_header, parent, false);
+    protected void init() {
+        setHeaderLayoutRes(R.layout.item_expandable_option_radio_header);
+        super.init();
     }
 
     @Override
-    protected View getFooterLayout(LayoutInflater inflater, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public CompoundButton getCheckable(View view) {
-        if (radioButton == null) {
-            radioButton = (AppCompatRadioButton) view.findViewById(R.id.radio_button);
+    public CompoundButton getCheckable() {
+        if (radioButton == null && getRootView()!= null) {
+            radioButton = (AppCompatRadioButton) getRootView().findViewById(R.id.radio_button);
         }
         return radioButton;
     }
