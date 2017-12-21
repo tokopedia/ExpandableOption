@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tokopedia.expandable.sample.MainActivity">
 
-    <ScrollView
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:animateLayoutChanges="true">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <Button
+            android:gravity="center_horizontal"
+            android:id="@+id/radio_button_expandable_with_group"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Radio Button Expandable with group" />
 
-            <Button
-                android:id="@+id/radio_button_expandable_with_group"
-                android:text="Radio Button Expandable with group"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <Button
+            android:gravity="center_horizontal"
+            android:id="@+id/checked_button_expandable"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Checked Button Expandable" />
 
-            <Button
-                android:id="@+id/checked_button_expandable"
-                android:text="Checked Button Expandable"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <Button
+            android:gravity="center_horizontal"
+            android:id="@+id/switch_button_expandable"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Switch Button Expandable" />
 
-            <Button
-                android:id="@+id/switch_button_expandable"
-                android:text="Switch Button Expandable"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+        <Button
+            android:gravity="center_horizontal"
+            android:id="@+id/arrow_button_expandable"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Arrow Button Expandable" />
 
-            <Button
-                android:id="@+id/arrow_button_expandable"
-                android:text="Arrow Button Expandable"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/custom_button_expandable"
-                android:text="Custom Style Button Expandable"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </ScrollView>
-
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:gravity="center_horizontal"
+            android:id="@+id/custom_button_expandable"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Custom Style Button Expandable" />
+    </LinearLayout>
+</ScrollView>

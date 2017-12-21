@@ -1,21 +1,21 @@
 package com.tokopedia.expandable;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 /**
  * Created by zulfikarrahman on 2/22/17.
  */
 
-public class ExpandableOptionRadio extends BaseExpandableOption {
+public class ExpandableOptionRadio extends BaseExpandableOptionRadio {
 
-    private RadioButtonExpandable radioButton;
-    private int radioId = NO_ID;
+    private AppCompatRadioButton radioButton;
 
     public ExpandableOptionRadio(Context context) {
         super(context);
@@ -34,61 +34,17 @@ public class ExpandableOptionRadio extends BaseExpandableOption {
     }
 
     @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        radioButton.setText(titleText);
-        radioButton.setChecked(optionChecked);
-        setVisibleChildView(optionChecked);
-        radioButton.addOnCheckedChangeListener(onCheckedChangeRadio());
-        invalidate();
-        requestLayout();
+    protected void init() {
+        setHeaderLayoutRes(R.layout.item_expandable_option_radio_header);
+        super.init();
     }
 
     @Override
-    protected int getLayoutRes() {
-        return R.layout.item_expandable_option_radio;
-    }
-
-    @Override
-    protected void initView(View view) {
-        radioButton = (RadioButtonExpandable) view.findViewById(R.id.radio_button);
-        radioButton.setId(radioId);
-    }
-
-    @Override
-    protected void init(AttributeSet attrs) {
-        TypedArray styledAttributes = getContext().obtainStyledAttributes(attrs, R.styleable.ExpandableOption);
-        try {
-            radioId = styledAttributes.getResourceId(R.styleable.ExpandableOption_eo_radio_id, NO_ID);
-        } finally {
-            styledAttributes.recycle();
+    public CompoundButton getCheckable() {
+        if (radioButton == null && getRootView()!= null) {
+            radioButton = (AppCompatRadioButton) getRootView().findViewById(R.id.radio_button);
         }
-        super.init(attrs);
+        return radioButton;
     }
 
-    private CompoundButton.OnCheckedChangeListener onCheckedChangeRadio() {
-        return new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                setVisibleChildView(b);
-            }
-        };
-    }
-
-    public void setExpand(boolean b) {
-        radioButton.setChecked(b);
-        super.setExpand(b);
-    }
-
-    @Override
-    public void setTitleText(String titleText) {
-        radioButton.setText(titleText);
-        super.setTitleText(titleText);
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        radioButton.setEnabled(enabled);
-    }
 }

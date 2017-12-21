@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tokopedia.expandable.sample.CustomOptionExpandableActivity">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linear_layout"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:animateLayoutChanges="true">
+
+        <com.tokopedia.expandable.ExpandableOption
+            android:id="@+id/expandable_option"
+            android:padding="8dp"
+            app:eo_checked="true"
+            app:eo_title="title switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_stroke_gray_rounded">
+
+            <include layout="@layout/include_content_option" />
+        </com.tokopedia.expandable.ExpandableOption>
 
         <com.tokopedia.expandable.ExpandableOptionChecked
             android:id="@+id/checked"
@@ -17,9 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:background="@android:color/darker_gray"
+            android:padding="8dp"
             app:eo_enabled="false"
             app:eo_theme="@style/CustomExpandableStyle"
-            app:eo_title="Expandable view with custom style">
+            app:eo_title="Example of disabled view. This cannot expand.">
 
             <include layout="@layout/include_content_option" />
         </com.tokopedia.expandable.ExpandableOptionChecked>
@@ -29,9 +43,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/darker_gray"
+            android:padding="8dp"
             app:eo_image_arrow_down="@drawable/ic_down"
             app:eo_image_arrow_up="@drawable/ic_up"
-            app:eo_title="Expandable with custom arrow">
+            app:eo_title="Expandable with custom arrow"
+            app:eo_use_rotate_animation="true">
 
             <include layout="@layout/include_content_option" />
 
@@ -39,4 +55,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -5,7 +5,9 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 /**
@@ -37,22 +39,23 @@ public class ExpandableOptionSwitch extends BaseExpandableOptionText {
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                setVisibleChildView(isChecked);
+                setExpand(isChecked);
             }
         });
-        switchCompat.setChecked(optionChecked);
+        switchCompat.setChecked(isExpanded());
         super.onFinishInflate();
+    }
+
+    @Override
+    protected void init() {
+        setHeaderLayoutRes(R.layout.item_expandable_option_switch_header);
+        super.init();
     }
 
     @Override
     protected void initView(View view) {
         switchCompat = (SwitchCompat) view.findViewById(R.id.switch_button);
         super.initView(view);
-    }
-
-    @Override
-    protected int getLayoutRes() {
-        return R.layout.item_expandable_option_switch;
     }
 
     @Override

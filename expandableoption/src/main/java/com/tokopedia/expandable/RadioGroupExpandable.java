@@ -5,36 +5,29 @@ package com.tokopedia.expandable;
  */
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 
 
-
-public class RadioGroupExpandable extends LinearLayout {
-    public static final String CHECKED_ID = "CheckedId";
-    public static final String PROTECT_FROM_CHECKED = "PROTECT_FROM_CHECKED";
-    public static final String SUPER_STATE = "superState";
+public class RadioGroupExpandable extends LinearLayout
+        implements ExpandableOptionRadio.OnRadioCheckChangedListener {
 
     private int checkedId = -1;
-    private CompoundButton.OnCheckedChangeListener checkedChangeListener;
-    private boolean protectFromCheckedChange = false;
     private OnCheckedChangeListener onCheckedChangeListener;
-    private HierarchyChangeListener hierarcyChangeListener;
 
     public RadioGroupExpandable(Context context) {
         super(context);
         setOrientation(VERTICAL);
         init();
+    }
+
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(RadioGroupExpandable group, @IdRes int checkedId);
     }
 
     public RadioGroupExpandable(Context context, AttributeSet attrs) {
@@ -43,14 +36,7 @@ public class RadioGroupExpandable extends LinearLayout {
     }
 
     private void init() {
-        checkedChangeListener = new CheckedStateTracker();
-        hierarcyChangeListener = new HierarchyChangeListener();
-        super.setOnHierarchyChangeListener(hierarcyChangeListener);
-    }
 
-    @Override
-    public void setOnHierarchyChangeListener(OnHierarchyChangeListener listener) {
-        hierarcyChangeListener.onHierarchyChangeListener = listener;
     }
 
     @Override
@@ -58,9 +44,7 @@ public class RadioGroupExpandable extends LinearLayout {
         super.onFinishInflate();
 
         if (checkedId != -1) {
-            protectFromCheckedChange = true;
             setCheckedStateForView(checkedId, true);
-            protectFromCheckedChange = false;
             setCheckedId(checkedId);
         }
     }
@@ -68,11 +52,12 @@ public class RadioGroupExpandable extends LinearLayout {
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        if (child instanceof RadioButtonExpandable) {
-            final RadioButtonExpandable button = (RadioButtonExpandable) child;
-            setFlagRadioButton(button);
+        if (child instanceof ExpandableOptionRadio) {
+            ((ExpandableOptionRadio) child).setOnRadioCheckChangedListener(this);
+            if (((ExpandableOptionRadio) child).isExpanded()) {
+                checkedId = child.getId();
+            }
         }
-
         super.addView(child, index, params);
     }
 
@@ -99,10 +84,16 @@ public class RadioGroupExpandable extends LinearLayout {
         }
     }
 
+    /**
+     * make the view with viewId checked/not checked
+     *
+     * @param viewId  Res viewId
+     * @param checked true/false
+     */
     private void setCheckedStateForView(int viewId, boolean checked) {
         View checkedView = findViewById(viewId);
-        if (checkedView != null && checkedView instanceof RadioButtonExpandable) {
-            ((RadioButtonExpandable) checkedView).setChecked(checked);
+        if (checkedView != null && checkedView instanceof ExpandableOptionRadio) {
+            ((ExpandableOptionRadio) checkedView).setExpand(checked);
         }
     }
 
@@ -119,165 +110,17 @@ public class RadioGroupExpandable extends LinearLayout {
         onCheckedChangeListener = listener;
     }
 
+    /**
+     * When the radio button on child changed.
+     *
+     * @param expandableOptionRadio radio that changes.
+     * @param id                       id of child radio button that changed
+     * @param isChecked                should be true
+     */
     @Override
-    public LayoutParams generateLayoutParams(AttributeSet attrs) {
-        return new RadioGroupExpandable.LayoutParams(getContext(), attrs);
-    }
-
-    @Override
-    protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        return p instanceof RadioGroup.LayoutParams;
-    }
-
-    @Override
-    protected LinearLayout.LayoutParams generateDefaultLayoutParams() {
-        return new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-    }
-
-    @Override
-    public CharSequence getAccessibilityClassName() {
-        return RadioGroup.class.getName();
-    }
-
-    public static class LayoutParams extends LinearLayout.LayoutParams {
-
-        public LayoutParams(Context c, AttributeSet attrs) {
-            super(c, attrs);
-        }
-
-        public LayoutParams(int w, int h) {
-            super(w, h);
-        }
-
-        public LayoutParams(int w, int h, float initWeight) {
-            super(w, h, initWeight);
-        }
-
-        public LayoutParams(ViewGroup.LayoutParams p) {
-            super(p);
-        }
-
-        public LayoutParams(MarginLayoutParams source) {
-            super(source);
-        }
-
-        @Override
-        protected void setBaseAttributes(TypedArray a,
-                                         int widthAttr, int heightAttr) {
-
-            if (a.hasValue(widthAttr)) {
-                width = a.getLayoutDimension(widthAttr, "layout_width");
-            } else {
-                width = WRAP_CONTENT;
-            }
-
-            if (a.hasValue(heightAttr)) {
-                height = a.getLayoutDimension(heightAttr, "layout_height");
-            } else {
-                height = WRAP_CONTENT;
-            }
-        }
-    }
-
-    public interface OnCheckedChangeListener {
-        void onCheckedChanged(RadioGroupExpandable group, @IdRes int checkedId);
-    }
-
-    private class CheckedStateTracker implements CompoundButton.OnCheckedChangeListener {
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-            if (protectFromCheckedChange) {
-                return;
-            }
-
-            protectFromCheckedChange = true;
-            if (checkedId != -1) {
-                setCheckedStateForView(checkedId, false);
-            }
-            protectFromCheckedChange = false;
-
-            int id = buttonView.getId();
-            setCheckedId(id);
-        }
-    }
-
-    private class HierarchyChangeListener implements
-            ViewGroup.OnHierarchyChangeListener {
-        private ViewGroup.OnHierarchyChangeListener onHierarchyChangeListener;
-
-        public void traverseTree(View view) {
-            if (view instanceof RadioButtonExpandable) {
-                int id = view.getId();
-                if (id == View.NO_ID) {
-                    id = generateId();
-                    view.setId(id);
-                }
-                RadioButtonExpandable radioButton = ((RadioButtonExpandable) view);
-                radioButton.addOnCheckedChangeListener(
-                        checkedChangeListener);
-
-                setFlagRadioButton(radioButton);
-            }
-            if (!(view instanceof ViewGroup)) {
-                return;
-            }
-            ViewGroup viewGroup = (ViewGroup) view;
-            if (viewGroup.getChildCount() == 0) {
-                return;
-            }
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                traverseTree(viewGroup.getChildAt(i));
-            }
-        }
-
-        public void onChildViewAdded(View parent, View child) {
-            traverseTree(child);
-            if (parent == RadioGroupExpandable.this && child instanceof RadioButtonExpandable) {
-                int id = child.getId();
-                if (id == View.NO_ID) {
-                    id = generateId();
-                    child.setId(id);
-                }
-                RadioButtonExpandable radioButton = ((RadioButtonExpandable) child);
-
-                setFlagRadioButton(radioButton);
-            }
-
-            if (onHierarchyChangeListener != null) {
-                onHierarchyChangeListener.onChildViewAdded(parent, child);
-            }
-        }
-
-        public void onChildViewRemoved(View parent, View child) {
-            if (parent == RadioGroupExpandable.this && child instanceof RadioButtonExpandable) {
-                ((RadioButtonExpandable) child).clearOnCheckedChangeListener();
-            }
-
-            if (onHierarchyChangeListener != null) {
-                onHierarchyChangeListener.onChildViewRemoved(parent, child);
-            }
-        }
-    }
-
-    private int generateId() {
-        int id;
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            id = Utils.generateViewId();
-        }else{
-            id = View.generateViewId();
-        }
-        return id;
-    }
-
-    private void setFlagRadioButton(RadioButtonExpandable radioButton) {
-        if (radioButton.isChecked()) {
-            protectFromCheckedChange = true;
-            if (checkedId != -1) {
-                setCheckedStateForView(checkedId, false);
-            }
-            protectFromCheckedChange = false;
-            setCheckedId(radioButton.getId());
-        }
+    public void onCheckChangedListener(BaseExpandableOptionRadio expandableOptionRadio,
+                                       int id, boolean isChecked) {
+        check(id);
     }
 
     @Override

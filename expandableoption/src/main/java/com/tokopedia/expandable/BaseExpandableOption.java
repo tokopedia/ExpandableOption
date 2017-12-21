@@ -1,16 +1,16 @@
 package com.tokopedia.expandable;
 
+import android.animation.LayoutTransition;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
 import android.support.v7.view.ContextThemeWrapper;
 import android.util.AttributeSet;
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,20 +19,19 @@ import android.widget.LinearLayout;
  * Created by zulfikarrahman on 4/6/17.
  */
 
-public abstract class BaseExpandableOption extends LinearLayout {
+public abstract class BaseExpandableOption extends LinearLayout implements View.OnClickListener {
 
-    public static final String OPTION_CHECKED = "OPTION_CHECKED";
-    public static final String TITLE_TEXT = "TITLE_TEXT";
-    public static final String OPTION_ENABLED = "OPTION_ENABLED";
-    public static final String SUPER_STATE = "superState";
-    @StyleRes
-    private int expandableLayoutTheme;
-    protected ExpandableViewLinear expandableViewLinear;
-
-    protected boolean optionChecked;
-    protected boolean optionEnabled = true;
-    protected String titleText ="";
+    protected String titleText = "";
     private ExpandableListener expandableListener;
+    private ViewGroup vgHeader;
+    protected ViewGroup expandableChildViewLinear;
+    private boolean optionChecked;
+    private boolean optionEnabled = true;
+
+    private View headerView;
+    private View footerView;
+    private int headerLayoutRes;
+    private int footerLayoutRes;
 
     public BaseExpandableOption(Context context) {
         super(context);
@@ -63,67 +62,17 @@ public abstract class BaseExpandableOption extends LinearLayout {
         return VERTICAL;
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        int childs = getChildCount();
-        for(int i = 1; i<childs; i++){
-            View childView = getChildAt(i);
-            ((ViewGroup)childView.getParent()).removeView(childView);
-            expandableViewLinear.addView(childView);
-        }
-    }
-
-    public void toggle() {
-        if(expandableViewLinear.getVisibility() == GONE){
-            setVisibleChildView(true);
-        }else{
-            setVisibleChildView(false);
-        }
-    }
-
-    public void setVisibleChildView(boolean b) {
-        optionChecked = b;
-        if (b) {
-            expandableViewLinear.expand();
-        } else {
-            expandableViewLinear.collapse();
-        }
-
-        if(expandableListener != null){
-            expandableListener.onExpandViewChange(b);
-        }
-    }
-
-    public void setExpand(boolean isChecked){
-        optionChecked = isChecked;
-        setVisibleChildView(isChecked);
-    }
-
-    public boolean isExpanded(){
-        return optionChecked;
-    }
-
-    protected void setTitleText(String titleText){
-        this.titleText = titleText;
-    }
-
-    protected String getTitleText(){
-        return titleText;
-    }
-
-    public void setExpandableListener(ExpandableListener expandableListener){
-        this.expandableListener = expandableListener;
-    }
-
     @SuppressWarnings("RestrictedApi")
-    protected void init(AttributeSet attributeSet){
-        TypedArray styledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.ExpandableOption);
+    protected void init(AttributeSet attributeSet) {
+        TypedArray styledAttributes = getContext().obtainStyledAttributes(attributeSet, R.styleable.BaseExpandableOption);
+        int expandableLayoutTheme;
         try {
-            expandableLayoutTheme = styledAttributes.getResourceId(R.styleable.ExpandableOption_eo_theme, R.style.style_expandable_option_default);
-            optionChecked = styledAttributes.getBoolean(R.styleable.ExpandableOption_eo_checked, false);
-            titleText = styledAttributes.getString(R.styleable.ExpandableOption_eo_title);
-            optionEnabled = styledAttributes.getBoolean(R.styleable.ExpandableOption_eo_enabled, true);
+            expandableLayoutTheme = styledAttributes.getResourceId(R.styleable.BaseExpandableOption_eo_theme,
+                    R.style.style_expandable_option_default);
+            optionChecked = styledAttributes.getBoolean(R.styleable.BaseExpandableOption_eo_checked, false);
+            titleText = styledAttributes.getString(R.styleable.BaseExpandableOption_eo_title);
+            optionEnabled = styledAttributes.getBoolean(R.styleable.BaseExpandableOption_eo_enabled, true);
+            headerLayoutRes = styledAttributes.getResourceId(R.styleable.BaseExpandableOption_eo_header_layout, -1);
         } finally {
             styledAttributes.recycle();
         }
@@ -132,19 +81,154 @@ public abstract class BaseExpandableOption extends LinearLayout {
     }
 
     protected void init() {
-        View view = inflate(getContext(), getLayoutRes(), this);
+        setOrientation(getOrientation());
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View view = inflater.inflate(R.layout.item_expandable_option_base, this, false);
+
+        ViewGroup vgRoot = (ViewGroup) view.findViewById(R.id.vg_root);
+        LayoutTransition layoutTransition = vgRoot.getLayoutTransition();
+        layoutTransition.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 0);
+
+        vgHeader = ((ViewGroup) view.findViewById(R.id.content_header_option));
+        setUpHeaderFromRes();
+
+        expandableChildViewLinear = (ViewGroup) view.findViewById(R.id.expandable_view);
+        setUpFooterFromRes();
+
+        addView(view);
         initView(view);
-        expandableViewLinear = (ExpandableViewLinear) view.findViewById(R.id.expandable_view);
-        setVisibleChildView(optionChecked);
+
+        setExpand(optionChecked);
         setEnabled(optionEnabled);
-        setOrientation(VERTICAL);
+    }
+
+    private void setUpHeaderFromRes(){
+        if (getRootView()!= null && headerLayoutRes > 0 && vgHeader!= null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View headerView;
+            headerView = inflater.inflate(headerLayoutRes, (ViewGroup)getRootView(), false);
+            setHeaderView(headerView);
+        }
+    }
+
+    private void setUpFooterFromRes(){
+        if (getRootView()!= null && footerLayoutRes > 0 && expandableChildViewLinear!= null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            View footerView;
+            footerView = inflater.inflate(footerLayoutRes, (ViewGroup)getRootView(), false);
+            setFooterView(footerView);
+        }
+    }
+
+    public boolean isHeaderCanToogle() {
+        return true;
+    }
+
+    public void setHeaderView(View customHeaderView) {
+        if (customHeaderView != null) {
+            if (headerView != null) {
+                if (headerView.getParent() != null) {
+                    ((ViewGroup) headerView.getParent()).removeView(headerView);
+                }
+            }
+            this.headerView = customHeaderView;
+            vgHeader.addView(customHeaderView, 0);
+            if (isHeaderCanToogle()) {
+                customHeaderView.setClickable(true);
+                customHeaderView.setOnClickListener(this);
+            }
+        }
+    }
+
+    public void setFooterView(View customFooterView) {
+        if (customFooterView != null) {
+            if (footerView != null) {
+                if (footerView.getParent() != null) {
+                    ((ViewGroup) footerView.getParent()).removeView(footerView);
+                }
+            }
+            this.footerView = customFooterView;
+            expandableChildViewLinear.addView(customFooterView);
+        }
+    }
+
+    public void toggle() {
+        if (isExpanded()) {
+            setExpand(false);
+        } else {
+            setExpand(true);
+        }
+    }
+
+    public void setExpand(boolean isExpanded) {
+        if (isExpanded) {
+            expandableChildViewLinear.setVisibility(View.VISIBLE);
+        } else {
+            expandableChildViewLinear.setVisibility(View.GONE);
+        }
+
+        if (expandableListener != null) {
+            expandableListener.onExpandViewChange(isExpanded);
+        }
+    }
+
+    public boolean isExpanded() {
+        return expandableChildViewLinear.getVisibility() == View.VISIBLE;
+    }
+
+    protected void setTitleText(String titleText) {
+        this.titleText = titleText;
+    }
+
+    protected String getTitleText() {
+        return titleText;
+    }
+
+    public void setExpandableListener(ExpandableListener expandableListener) {
+        this.expandableListener = expandableListener;
+    }
+
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+        if (child.getId() == R.id.vg_root) {
+            super.addView(child, index, params);
+        } else {
+            // remove the link between child and previous parent before add (if any)
+            if (child.getParent() != null) {
+                ViewGroup viewParent = (ViewGroup) child.getParent();
+                viewParent.removeView(child);
+            }
+            expandableChildViewLinear.addView(child, params);
+        }
     }
 
     protected abstract void initView(View view);
 
-    protected abstract int getLayoutRes();
+    public void setHeaderLayoutRes(int headerLayoutRes) {
+        this.headerLayoutRes = headerLayoutRes;
+        setUpHeaderFromRes();
+    }
 
-    public interface ExpandableListener{
+    public void setFooterLayoutRes(int footerLayoutRes) {
+        this.footerLayoutRes = footerLayoutRes;
+        setUpFooterFromRes();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == headerView) {
+            if (isEnabled()) {
+                onHeaderClicked();
+            }
+        }
+    }
+
+    protected void onHeaderClicked() {
+        toggle();
+    }
+
+    public interface ExpandableListener {
         void onExpandViewChange(boolean isExpand);
     }
 
@@ -152,7 +236,7 @@ public abstract class BaseExpandableOption extends LinearLayout {
     protected Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
         SavedState ss = new SavedState(superState);
-        ss.childrenStates = new SparseArray();
+        ss.childrenStates = new SparseArray<>();
         for (int i = 0; i < getChildCount(); i++) {
             getChildAt(i).saveHierarchyState(ss.childrenStates);
         }
@@ -178,9 +262,4 @@ public abstract class BaseExpandableOption extends LinearLayout {
         dispatchThawSelfOnly(container);
     }
 
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        optionEnabled = enabled;
-    }
 }

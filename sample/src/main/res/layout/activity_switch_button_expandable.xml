@@ -1,22 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    tools:context="com.tokopedia.expandable.sample.SwitchButtonExpandableActivity">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.tokopedia.expandable.ExpandableOptionSwitch
-        android:id="@+id/switch_button"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:eo_checked="true"
-        app:eo_title="title switch">
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:animateLayoutChanges="true"
+        tools:context="com.tokopedia.expandable.sample.SwitchButtonExpandableActivity">
 
-        <include layout="@layout/include_content_option" />
+        <com.tokopedia.expandable.ExpandableOptionSwitch
+            android:id="@+id/eo_switch_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:eo_checked="false"
+            app:eo_title="title switch">
 
-    </com.tokopedia.expandable.ExpandableOptionSwitch>
+            <include layout="@layout/include_content_option" />
 
-</android.support.constraint.ConstraintLayout>
+        </com.tokopedia.expandable.ExpandableOptionSwitch>
+
+        <com.tokopedia.expandable.ExpandableOptionSwitch
+            android:id="@+id/eo_switch_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:eo_checked="true"
+            app:eo_title="title switch">
+
+            <include layout="@layout/include_content_option" />
+
+        </com.tokopedia.expandable.ExpandableOptionSwitch>
+
+        <com.tokopedia.expandable.ExpandableOptionSwitch
+            android:id="@+id/eo_switch_button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            app:eo_checked="false"
+            app:eo_title="title switch">
+
+            <include layout="@layout/include_content_option" />
+
+        </com.tokopedia.expandable.ExpandableOptionSwitch>
+
+    </LinearLayout>
+</ScrollView>
