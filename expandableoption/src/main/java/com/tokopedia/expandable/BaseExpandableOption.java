@@ -177,6 +177,14 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         return expandableChildViewLinear.getVisibility() == View.VISIBLE;
     }
 
+    public boolean isChecked() {
+        return isExpanded();
+    }
+
+    public void setChecked(boolean isChecked) {
+        setExpand(isChecked);
+    }
+
     protected void setTitleText(String titleText) {
         this.titleText = titleText;
     }
