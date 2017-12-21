@@ -70,7 +70,7 @@ baseExpandableOptionObject.setExpandableListener(new BaseExpandableOption.Expand
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:checked_option="true"
+        app:checked="true"
         app:title_option="title switch">
 
         <include layout="@layout/include_content_option"/>
@@ -84,7 +84,7 @@ baseExpandableOptionObject.setExpandableListener(new BaseExpandableOption.Expand
 <com.tokopedia.expandable.ExpandableOptionSwitch
         android:background="@android:color/white"
         app:title_option="title switch"
-        app:checked_option="true"
+        app:checked="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -126,7 +126,7 @@ baseExpandableOptionObject.setExpandableListener(new BaseExpandableOption.Expand
 </com.tokopedia.expandable.ExpandableOptionChecked>
 ```
 
-#### style xml
+#### Example of Custom Style - XML
 
 ``` style xml
 <style name="CustomExpandableStyle" parent="style_expandable_option_default">
