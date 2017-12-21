@@ -2,7 +2,7 @@
 
 This library is used to show a layout expandable with kind of header option like switch, radio button, checkbox, etc.
 
-<img src="record_expandable_option.gif?raw=true" alt="" width="240" />
+<img src="expandable_sample.gif?raw=true" alt="" width="240" />
 
 ## Usage
 ====
