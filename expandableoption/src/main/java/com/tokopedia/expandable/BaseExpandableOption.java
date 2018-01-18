@@ -13,6 +13,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 /**
@@ -32,6 +33,8 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
     private View footerView;
     private int headerLayoutRes;
     private int footerLayoutRes;
+    private boolean isEnableAnimation;
+    private ViewGroup vgRoot;
 
     public BaseExpandableOption(Context context) {
         super(context);
@@ -57,6 +60,20 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         init();
     }
 
+    private void checkParentAnimation() {
+        if (getParent() != null) {
+            ViewGroup parent = ((ViewGroup) getParent());
+            LayoutTransition lt = parent.getLayoutTransition();
+            if (isEnableAnimation) {
+                if (lt == null) {
+                    lt = new LayoutTransition();
+                }
+                lt.enableTransitionType(LayoutTransition.CHANGING);
+                parent.setLayoutTransition(lt);
+            }
+        }
+    }
+
     @Override
     public int getOrientation() {
         return VERTICAL;
@@ -73,6 +90,7 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
             titleText = styledAttributes.getString(R.styleable.BaseExpandableOption_eo_title);
             optionEnabled = styledAttributes.getBoolean(R.styleable.BaseExpandableOption_eo_enabled, true);
             headerLayoutRes = styledAttributes.getResourceId(R.styleable.BaseExpandableOption_eo_header_layout, -1);
+            isEnableAnimation = styledAttributes.getBoolean(R.styleable.BaseExpandableOption_eo_enable_animation, false);
         } finally {
             styledAttributes.recycle();
         }
@@ -86,9 +104,8 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.item_expandable_option_base, this, false);
 
-        ViewGroup vgRoot = (ViewGroup) view.findViewById(R.id.vg_root);
-        LayoutTransition layoutTransition = vgRoot.getLayoutTransition();
-        layoutTransition.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 0);
+        vgRoot = (ViewGroup) view.findViewById(R.id.vg_root);
+        setEnableAnimation(isEnableAnimation);
 
         vgHeader = ((ViewGroup) view.findViewById(R.id.content_header_option));
         setUpHeaderFromRes();
@@ -101,22 +118,54 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
 
         setExpand(optionChecked);
         setEnabled(optionEnabled);
+
+        this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                checkParentAnimation();
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+            }
+        });
     }
 
-    private void setUpHeaderFromRes(){
-        if (getRootView()!= null && headerLayoutRes > 0 && vgHeader!= null) {
+    public void setEnableAnimation(boolean enableAnimation) {
+        isEnableAnimation = enableAnimation;
+        if (vgRoot == null) {
+            return;
+        }
+        if (isEnableAnimation) {
+            LayoutTransition layoutTransition = vgRoot.getLayoutTransition();
+            if (layoutTransition == null) {
+                layoutTransition = new LayoutTransition();
+            }
+            layoutTransition.setStartDelay(LayoutTransition.CHANGE_DISAPPEARING, 0);
+            layoutTransition.disableTransitionType(LayoutTransition.CHANGE_APPEARING);
+            layoutTransition.disableTransitionType(LayoutTransition.APPEARING);
+            vgRoot.setLayoutTransition(layoutTransition);
+        } else {
+            vgRoot.setLayoutTransition(null);
+        }
+        checkParentAnimation();
+    }
+
+    private void setUpHeaderFromRes() {
+        if (getRootView() != null && headerLayoutRes > 0 && vgHeader != null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View headerView;
-            headerView = inflater.inflate(headerLayoutRes, (ViewGroup)getRootView(), false);
+            headerView = inflater.inflate(headerLayoutRes, (ViewGroup) getRootView(), false);
             setHeaderView(headerView);
         }
     }
 
-    private void setUpFooterFromRes(){
-        if (getRootView()!= null && footerLayoutRes > 0 && expandableChildViewLinear!= null) {
+    private void setUpFooterFromRes() {
+        if (getRootView() != null && footerLayoutRes > 0 && expandableChildViewLinear != null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             View footerView;
-            footerView = inflater.inflate(footerLayoutRes, (ViewGroup)getRootView(), false);
+            footerView = inflater.inflate(footerLayoutRes, (ViewGroup) getRootView(), false);
             setFooterView(footerView);
         }
     }

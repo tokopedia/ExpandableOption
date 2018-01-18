@@ -15,7 +15,8 @@
             app:eo_title="title switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
 
@@ -26,7 +27,8 @@
             app:eo_title="title switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
         </com.tokopedia.expandable.ExpandableOptionRadio>
@@ -37,7 +39,8 @@
             app:eo_title="title switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
         </com.tokopedia.expandable.ExpandableOptionRadio>

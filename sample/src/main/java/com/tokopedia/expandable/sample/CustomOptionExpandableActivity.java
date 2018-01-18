@@ -16,10 +16,6 @@ public class CustomOptionExpandableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_style);
 
-        ViewGroup layout = (ViewGroup) findViewById(R.id.linear_layout);
-        LayoutTransition layoutTransition = layout.getLayoutTransition();
-        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
-
         // header can be set programmatically here, instead of xml
         BaseExpandableOption baseExpandableOption = (BaseExpandableOption) findViewById(R.id.expandable_option);
         View headerView = LayoutInflater.from(this).inflate(R.layout.custom_header,

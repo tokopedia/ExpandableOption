@@ -11,9 +11,5 @@ public class SwitchButtonExpandableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_switch_button_expandable);
-
-        ViewGroup layout = (ViewGroup) findViewById(R.id.linear_layout);
-        LayoutTransition layoutTransition = layout.getLayoutTransition();
-        layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
     }
 }

@@ -21,7 +21,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             app:eo_checked="false"
-            app:eo_title="title switch">
+            app:eo_title="title switch"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
 
@@ -33,7 +34,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             app:eo_checked="true"
-            app:eo_title="title switch">
+            app:eo_title="title switch"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
 
@@ -45,7 +47,8 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             app:eo_checked="false"
-            app:eo_title="title switch">
+            app:eo_title="title switch"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
 

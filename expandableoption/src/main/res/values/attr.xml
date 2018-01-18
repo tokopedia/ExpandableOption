@@ -5,13 +5,13 @@
     <declare-styleable name="BaseExpandableOption" >
         <attr name="eo_title" format="reference|string" />
         <attr name="eo_checked" format="boolean"/>
-        <attr name="eo_radio_id" format="reference|integer" />
         <attr name="eo_image_arrow_up" format="reference"/>
         <attr name="eo_image_arrow_down" format="reference"/>
         <attr name="eo_use_rotate_animation" format="boolean"/>
         <attr name="eo_theme" format="reference"/>
         <attr name="eo_header_layout" format="reference"/>
         <attr name="eo_enabled" format="reference|boolean"/>
+        <attr name="eo_enable_animation" format="reference|boolean"/>
     </declare-styleable>
 
     <declare-styleable name="ExpandableOptionDefaultTheme">

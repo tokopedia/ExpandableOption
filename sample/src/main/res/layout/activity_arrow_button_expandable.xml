@@ -12,8 +12,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
         <com.tokopedia.expandable.ExpandableOptionArrow
             android:id="@+id/arrow"
@@ -23,7 +23,8 @@
             app:eo_checked="true"
             app:eo_title="title switch"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp">
+            tools:layout_editor_absoluteY="0dp"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
         </com.tokopedia.expandable.ExpandableOptionArrow>
@@ -35,6 +36,7 @@
             android:background="@drawable/rect_stroke_gray_rounded"
             app:eo_checked="true"
             app:eo_title="title switch"
+            app:eo_enable_animation="true"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp">
 
@@ -48,6 +50,7 @@
             android:background="@drawable/rect_stroke_gray_rounded"
             app:eo_checked="true"
             app:eo_title="title switch"
+            app:eo_enable_animation="true"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp">
 

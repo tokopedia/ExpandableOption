@@ -17,6 +17,8 @@
             android:padding="8dp"
             app:eo_checked="true"
             app:eo_title="title switch"
+            app:eo_header_layout="@layout/custom_header"
+            app:eo_enable_animation="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rect_stroke_gray_rounded">
@@ -33,6 +35,7 @@
             android:padding="8dp"
             app:eo_enabled="false"
             app:eo_theme="@style/CustomExpandableStyle"
+            app:eo_enable_animation="true"
             app:eo_title="Example of disabled view. This cannot expand.">
 
             <include layout="@layout/include_content_option" />
@@ -47,7 +50,8 @@
             app:eo_image_arrow_down="@drawable/ic_down"
             app:eo_image_arrow_up="@drawable/ic_up"
             app:eo_title="Expandable with custom arrow"
-            app:eo_use_rotate_animation="true">
+            app:eo_use_rotate_animation="true"
+            app:eo_enable_animation="true">
 
             <include layout="@layout/include_content_option" />
 
