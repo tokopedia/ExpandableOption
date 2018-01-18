@@ -1,8 +1,12 @@
 # Expandable Option
 
-This library is used to show a layout expandable with kind of header option like switch, radio button, checkbox, etc.
+This library is used to show a layout expandable with kind of header option like switch, radio button, checkbox, or even custome header as you like.
 
-<img src="record_expandable_option.gif?raw=true" alt="" width="240" />
+<img src="expandable_sample.gif?raw=true" alt="" width="240" />
+
+## To Install
+See here
+https://bintray.com/tokopedia/maven/ExpandableOption
 
 ## Usage
 ====
@@ -10,153 +14,67 @@ This library is used to show a layout expandable with kind of header option like
 ### ExpandableOptionRadio
 
 #### Usage
-this option radio is used to expand view when status checked radio button is change.
-you need to use RadioGroupExpandable if you want to use it on RadioGroup.
-because radio group of android couldn't handle radio button inside another child view.
+Use RadioGroupExpandable as a RadioGroup.
 
-#### Code ExpandableOptionRadio
+#### Example Code - ExpandableOptionRadio
 
 ```java
-ExpandableOptionRadio expandableRadio = (ExpandableOptionRadio) findViewById(R.id.expandableOptionRadio)
+baseExpandableOptionObject.setExpand(true);
+baseExpandableOptionObject.toggle();
+baseExpandableOptionObject.isExpanded();
 
-// toggle expand, collapse
-expandableRadio.toggle();
-// expand
-expandableRadio.expand();
-// collapse
-expandableRadio.collapse();
-
-//set checked radio
-expandableRadio.setChecked(true);
-
-//get status checked of radio
-boolean isChecked = expandableRadio.isChecked();
-
-//set title expandable
-expandableRadio.setTitleText("expandable radio");
+baseExpandableOptionObject.setTitleText("expandable radio");
 
 //set listener of expandable view when collapse or expand
-expandableRadio.setExpandableListener(new BaseExpandableOption.ExpandableListener() {
+baseExpandableOptionObject.setExpandableListener(new BaseExpandableOption.ExpandableListener() {
             @Override
             public void onExpandViewChange(boolean isExpand) {
-                //do something
+                //do something when expand/collapse
             }
         });
 ```
 
-#### Code RadioGroupExpandable
-
-```java
-RadioGroupExpandable radioGroup = (RadioGroupExpandable) findViewById(R.id.expandableRadioGroup);
-
-//set listener radio group when status radio button checked change
-radioGroup.setOnCheckedChangeListener(new TopAdsCustomRadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(TopAdsCustomRadioGroup group, @IdRes int checkedId) {
-                //do something
-            }
-        });
-
-//get id of radio button which checked
-radioGroup.getCheckedRadioButtonId();
-
-```
-
-#### Layout xml
+#### Example Code XML - ExpandableOptionRadio and RadioGroupExpandable
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.tokopedia.expandable.sample.RadioButtonExpandableActivity">
+<com.tokopedia.expandable.RadioGroupExpandable
+    android:id="@+id/radio_group"
+    android:layout_width="368dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <com.tokopedia.expandable.RadioGroupExpandable
-        android:layout_width="368dp"
+    <com.tokopedia.expandable.ExpandableOptionRadio
+        android:id="@+id/radio1"
+        app:eo_title="title switch"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@android:color/white">
+    
+        <include layout="@layout/include_content_option" />
 
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:radio_id=@+id/radio_id_1
-            app:title_option="title switch">
+    </com.tokopedia.expandable.ExpandableOptionRadio>
 
-            <include layout="@layout/include_content_option" />
+    <com.tokopedia.expandable.ExpandableOptionRadio
+        android:id="@+id/radio2"
+        app:eo_title="title switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
-        </com.tokopedia.expandable.ExpandableOptionRadio>
-
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:radio_id=@+id/radio_id_2
-            app:title_option="title switch">
-
-            <include layout="@layout/include_content_option" />
-        </com.tokopedia.expandable.ExpandableOptionRadio>
-
-        <com.tokopedia.expandable.ExpandableOptionRadio
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            app:radio_id=@+id/radio_id_3
-            app:checked_option="true"
-            app:title_option="title switch">
-
-            <include layout="@layout/include_content_option" />
-        </com.tokopedia.expandable.ExpandableOptionRadio>
-    </com.tokopedia.expandable.RadioGroupExpandable>
-
-</android.support.constraint.ConstraintLayout>
+        <include layout="@layout/include_content_option" />
+    </com.tokopedia.expandable.ExpandableOptionRadio>
+</com.tokopedia.expandable.RadioGroupExpandable>
 ```
 
-### ExpandableOptionChecked
-
-#### Usage
-this option checked is used to expand view when status checked check box is change.
-
-#### Code ExpandableOptionChecked
-
-```java
-ExpandableOptionChecked expandableChecked = (ExpandableOptionChecked) findViewById(R.id.expandableOptionChecked)
-
-// toggle expand, collapse
-expandableChecked.toggle();
-// expand
-expandableChecked.expand();
-// collapse
-expandableChecked.collapse();
-
-//set checked option checkbox
-expandableChecked.setChecked(true);
-
-//get status checked of checkbox
-boolean isChecked = expandableChecked.isChecked();
-
-//set title expandable
-expandableChecked.setTitleText("expandable checked");
-
-//set listener of expandable view when collapse or expand
-expandableChecked.setExpandableListener(new BaseExpandableOption.ExpandableListener() {
-            @Override
-            public void onExpandViewChange(boolean isExpand) {
-                //do something
-            }
-        });
-```
-
-#### Layout xml
+#### Example Code XML - ExpandableOptionChecked
 
 ```xml
 <com.tokopedia.expandable.ExpandableOptionChecked
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        app:checked_option="true"
+        app:checked="true"
         app:title_option="title switch">
 
         <include layout="@layout/include_content_option"/>
@@ -164,19 +82,13 @@ expandableChecked.setExpandableListener(new BaseExpandableOption.ExpandableListe
 </com.tokopedia.expandable.ExpandableOptionChecked>
 ```
 
-### ExpandableOptionSwitch
-
-#### Usage
-this option checked is same with option checked, but this option use switch compat button to indicating expand view.
-
-
-#### Layout xml
+### Example Code XML - ExpandableOptionSwitch
 
 ```xml
 <com.tokopedia.expandable.ExpandableOptionSwitch
         android:background="@android:color/white"
         app:title_option="title switch"
-        app:checked_option="true"
+        app:checked="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -185,13 +97,7 @@ this option checked is same with option checked, but this option use switch comp
 </com.tokopedia.expandable.ExpandableOptionSwitch>
 ```
 
-### ExpandableOptionArrow
-
-#### Usage
-this option checked is same with option checked, but this option use image arrow button to indicating expand view.
-you can change resource of image arrow by xml.
-
-#### Layout xml
+### Example Code XML - ExpandableOptionArrow
 
 ```xml
 <com.tokopedia.expandable.ExpandableOptionArrow
@@ -201,6 +107,7 @@ you can change resource of image arrow by xml.
             app:resource_image_arrow_down="@drawable/ic_down"
             app:resource_image_arrow_up="@drawable/ic_up"
             app:checked_option="true"
+            app:eo_use_rotate_animation="true"
             app:title_option="Expandable with custom arrow">
 
             <include layout="@layout/include_content_option" />
@@ -208,13 +115,7 @@ you can change resource of image arrow by xml.
 </com.tokopedia.expandable.ExpandableOptionArrow>
 ```
 
-
-### Custom style expandable option
-
-#### Usage
-you can customize item inside of expandable option. for example you can change header of expandable option.
-
-#### Layout xml
+### Example Code XML - Custom ExpandableOption Style
 
 ```xml
 <com.tokopedia.expandable.ExpandableOptionChecked
@@ -229,7 +130,7 @@ you can customize item inside of expandable option. for example you can change h
 </com.tokopedia.expandable.ExpandableOptionChecked>
 ```
 
-#### style xml
+#### Example of Custom Style - XML
 
 ``` style xml
 <style name="CustomExpandableStyle" parent="style_expandable_option_default">
@@ -246,17 +147,28 @@ you can customize item inside of expandable option. for example you can change h
         <item name="android:textColor">@color/colorAccent</item>
 </style>
 ```
+### Example Code XML - Custom ExpandableOption Header
+```java
+View headerView = LayoutInflater.from(this).inflate(R.layout.custom_header,
+                (ViewGroup)baseExpandableOption.getRootView(), false);
+baseExpandableOption.setHeaderView(headerView);
+```
 
+or custom header in XML
+```xml
+app:eo_header_layout="@layout/custom_header"
+```
 
 ### Attributes
 
 |attribute name|description|
 |:-:|:-:|
 |title_option|title of expandable option|
-|checked_option|status of checked option|
-|radio_id|id of radio button which is used to get radio id with radio group|
-|resource_image_arrow_up|option to change resource image up of expandable option arrow)|
-|resource_image_arrow_down|option to change resource image up of expandable option arrow|
+|eo_checked|if set to true, default is checked|
+|resource_image_arrow_up|image resource for arrow UP only for ExpandableOptionArrow|
+|resource_image_arrow_down|image resource for arrow DOWN only for ExpandableOptionArrow|
+|eo_use_rotate_animation|if set to true, will use rotate animation for arrow for ExpandableOptionArrow|
+|eo_header_layout|layout resource for header if you need custom header, can also be set programmatically|
 |expandable_option_theme|theme to use for even more custom styling of expandable option layout. it is recommended that it should extend|
 
 ### ExpandableOption style attributes
