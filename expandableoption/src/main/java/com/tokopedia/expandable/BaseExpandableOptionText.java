@@ -47,8 +47,10 @@ public abstract class BaseExpandableOptionText extends BaseExpandableOption {
     }
 
     @Override
-    protected void setTitleText(String titleText) {
+    public void setTitleText(String titleText) {
         titleOption.setText(titleText);
         super.setTitleText(titleText);
+        invalidate();
+        requestLayout();
     }
 }
