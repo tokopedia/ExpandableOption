@@ -234,7 +234,7 @@ public abstract class BaseExpandableOption extends LinearLayout implements View.
         setExpand(isChecked);
     }
 
-    protected void setTitleText(String titleText) {
+    public void setTitleText(String titleText) {
         this.titleText = titleText;
     }
 
