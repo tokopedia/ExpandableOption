@@ -9,7 +9,6 @@ See here
 https://bintray.com/tokopedia/maven/ExpandableOption
 
 ## Usage
-====
 
 ### ExpandableOptionRadio
 
